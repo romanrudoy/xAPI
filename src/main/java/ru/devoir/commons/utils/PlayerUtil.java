@@ -1,6 +1,5 @@
 package ru.devoir.commons.utils;
 
-import com.comphenix.protocol.utility.MinecraftVersion;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

@@ -3,7 +3,6 @@ package ru.devoir.commons.utils.random;
 import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Map.Entry;
 
 public class Randomizer<T> {

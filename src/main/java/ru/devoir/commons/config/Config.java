@@ -20,7 +20,6 @@ public class Config {
     public Config(Plugin plugin, String name) {
 
         file = new File(plugin.getDataFolder(), name);
-
         load();
 
     }

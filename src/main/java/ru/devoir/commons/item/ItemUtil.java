@@ -17,8 +17,8 @@ import java.lang.reflect.Field;
 import java.util.*;
 
 public class ItemUtil {
-    private ItemStack itemstack = null;
-    private ItemMeta itemMeta = null;
+    private ItemStack itemstack;
+    private ItemMeta itemMeta;
 
     public ItemUtil() {
         this.itemstack = new ItemStack(Material.BEDROCK);
