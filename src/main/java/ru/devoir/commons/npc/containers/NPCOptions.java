@@ -12,4 +12,5 @@ public class NPCOptions {
     private final String signature;
     private final Location location;
     private final boolean hideNametag;
+    private final boolean rotateHead;
 }

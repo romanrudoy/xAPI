@@ -8,6 +8,8 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
+import ru.devoir.commons.function.Runnables;
 import ru.devoir.commons.npc.NMSHelper;
 import ru.devoir.commons.npc.containers.NPCOptions;
 import ru.devoir.commons.npc.containers.interfaces.NPC;
@@ -28,6 +30,7 @@ public class NPC_Reflection implements NPC {
     private final String texture;
     private final String signature;
     private final boolean hideNametag;
+    private final boolean rotateHead;
 
     private Object entityPlayer;
 
@@ -38,6 +41,7 @@ public class NPC_Reflection implements NPC {
         this.texture = npcOptions.getTexture();
         this.signature = npcOptions.getSignature();
         this.hideNametag = npcOptions.isHideNametag();
+        this.rotateHead = npcOptions.isRotateHead();
 
         if (hideNametag) {
             this.entityName = MessageUtil.randomCharacters(10);
@@ -175,15 +179,24 @@ public class NPC_Reflection implements NPC {
 
             sendHeadRotationPacket(player);
 
-//            Bukkit.getServer().getScheduler().runTaskTimer(plugin, task -> {
-//                Player currentlyOnline = Bukkit.getPlayer(player.getUniqueId());
-//                if (currentlyOnline == null || !currentlyOnline.isOnline()) {
-//                    task.cancel();
-//                    return;
-//                }
-//
-//                sendHeadRotationPacket(player);
-//            }, 0L, 2L);
+            if (rotateHead) {
+                new BukkitRunnable() {
+
+                    @Override
+                    public void run() {
+
+                        Player currentlyOnline = Bukkit.getPlayer(player.getUniqueId());
+                        if (currentlyOnline == null || !currentlyOnline.isOnline()) {
+                            cancel();
+                            return;
+                        }
+
+                        sendHeadRotationPacket(player);
+
+                    }
+
+                }.runTaskTimer(plugin, 0L, 1L);
+            }
 
             Bukkit.getServer().getScheduler().runTaskLater(plugin, () -> {
                 try {
@@ -322,4 +335,10 @@ public class NPC_Reflection implements NPC {
     private void sendPacket(Player player, Object packet) {
         NMSHelper.getInstance().sendPacket(player, packet);
     }
+
+    public void refresh() {
+        delete();
+        viewers.stream().map(Bukkit::getPlayer).filter(Objects::nonNull).forEach(this::showTo);
+    }
+
 }
