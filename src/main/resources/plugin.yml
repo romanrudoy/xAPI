@@ -1,0 +1,11 @@
+
+name: DevoirAPI
+main: ru.devoir.commons.DevoirPlugin
+
+version: 1.0.0
+author: devoirr
+
+depend:
+  - PlaceholderAPI
+  - ProtocolLib
+  - Vault
