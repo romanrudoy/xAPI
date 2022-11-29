@@ -115,12 +115,6 @@ public class ItemUtil {
         return this;
     }
 
-    public ItemUtil setTypeById(int id) {
-        this.itemstack.setTypeId(id);
-        this.update(this.itemstack);
-        return this;
-    }
-
     public ItemUtil setType(String string) {
         this.itemstack.setType(this.getMaterial(string.toUpperCase()));
         this.update(this.itemstack);
@@ -208,11 +202,6 @@ public class ItemUtil {
         return this;
     }
 
-    public ItemUtil setUnbreakable(boolean bool) {
-        this.itemMeta.spigot().setUnbreakable(bool);
-        return this;
-    }
-
     public ItemStack build() {
         this.itemstack.setItemMeta(this.itemMeta);
         this.update(this.itemstack);
@@ -221,7 +210,7 @@ public class ItemUtil {
 
     public Material getMaterial(String string) {
         string = string.toUpperCase();
-        return NumberUtils.isDigits(string) ? Material.getMaterial(Integer.parseInt(string)) : Material.getMaterial(string);
+        return Material.matchMaterial(string);
     }
 
     public int getAmount() {
