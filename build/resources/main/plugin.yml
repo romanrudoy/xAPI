@@ -1,9 +1,11 @@
 
-name: DevoirAPI
-main: ru.devoir.commons.DevoirPlugin
+name: xAPI
+main: com.babijon.commons.xAPI
 
 version: 1.0.0
-author: devoirr
+author: babijon_
+
+api-version: 1.16
 
 depend:
   - PlaceholderAPI

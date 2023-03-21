@@ -1,9 +1,16 @@
 plugins {
+    id "com.github.johnrengelman.shadow" version "7.1.2"
     id 'java'
 }
 
-group 'ru.devoir.commons'
-version '1.0-SNAPSHOT'
+tasks {
+    "shadowJar" {
+        relocate("com.cryptomorin.xseries", "my.plugin.utils")
+    }
+}
+
+group 'com.babijon.commons'
+version '1.0'
 
 repositories {
     mavenCentral()
@@ -26,19 +33,12 @@ repositories {
         url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/'
     }
     maven { url "https://repo.dmulloy2.net/repository/public/" }
+    maven { url = "https://repo.aikar.co/content/groups/aikar/" }
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-
-    compileOnly 'org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT'
     compileOnly 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
-
-    compileOnly 'org.spigotmc:spigot:1.12.2-R0.1-SNAPSHOT'
     compileOnly 'org.spigotmc:spigot:1.16.5-R0.1-SNAPSHOT'
-
-    compileOnly files("/Users/romanrudoy/Downloads/PacketWrapper.jar")
 
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
@@ -49,8 +49,20 @@ dependencies {
     compileOnly "com.github.MilkBowl:VaultAPI:1.7"
     compileOnly 'me.clip:placeholderapi:2.11.2'
     compileOnly group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.8.0";
+
+    compileOnly('org.jetbrains:annotations:16.0.2')
+
+    implementation "co.aikar:acf-paper:0.5.1-SNAPSHOT"
+    compileOnly 'net.luckperms:api:5.4'
+}
+
+shadowJar {
+    relocate 'co.aikar.commands', 'com.babijon.acf'
+    relocate 'co.aikar.locales', 'com.babijon.locales'
 }
 
 test {
     useJUnitPlatform()
 }
+
+build.dependsOn shadowJar
