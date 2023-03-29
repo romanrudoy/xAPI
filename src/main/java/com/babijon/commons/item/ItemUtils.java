@@ -142,8 +142,8 @@ public class ItemUtils {
 
         int amount = config.getConfigurationSection(key).getKeys(false).contains("amount") ?
                 config.getInt(key + ".amount") : 1;
-        int modelData = config.getConfigurationSection(key).getKeys(false).contains("custom-model-data") ?
-                config.getInt(key + ".custom-model-data") : 1;
+        int modelData = config.getConfigurationSection(key).getKeys(false).contains("modeldata") ?
+                config.getInt(key + ".modeldata") : 1;
 
         String material = config.getString(key + ".material");
         if (material.length() > 30)

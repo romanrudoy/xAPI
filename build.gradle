@@ -57,8 +57,6 @@ dependencies {
 }
 
 shadowJar {
-    relocate 'co.aikar.commands', 'com.babijon.acf'
-    relocate 'co.aikar.locales', 'com.babijon.locales'
 }
 
 test {
