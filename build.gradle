@@ -1,12 +1,5 @@
 plugins {
-    id "com.github.johnrengelman.shadow" version "7.1.2"
     id 'java'
-}
-
-tasks {
-    "shadowJar" {
-        relocate("com.cryptomorin.xseries", "my.plugin.utils")
-    }
 }
 
 group 'com.babijon.commons'
@@ -33,7 +26,6 @@ repositories {
         url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/'
     }
     maven { url "https://repo.dmulloy2.net/repository/public/" }
-    maven { url = "https://repo.aikar.co/content/groups/aikar/" }
 }
 
 dependencies {
@@ -51,18 +43,11 @@ dependencies {
     compileOnly group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.8.0";
 
     compileOnly('org.jetbrains:annotations:16.0.2')
-
-    implementation "co.aikar:acf-paper:0.5.1-SNAPSHOT"
     compileOnly 'net.luckperms:api:5.4'
 
     implementation 'org.reflections:reflections:0.10.2'
 }
 
-shadowJar {
-}
-
 test {
     useJUnitPlatform()
 }
-
-build.dependsOn shadowJar
