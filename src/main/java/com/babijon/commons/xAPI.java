@@ -1,5 +1,6 @@
 package com.babijon.commons;
 
+import com.babijon.commons.command.impl.TestCommand;
 import com.babijon.commons.cooldown.Cooldowns;
 import com.babijon.commons.cooldown.CooldownsDatabase;
 import com.babijon.commons.events.CustomEventsListener;
@@ -45,6 +46,8 @@ public class xAPI extends JavaPlugin {
         }
 
         Cooldowns.load();
+
+        new TestCommand();
 
     }
 
