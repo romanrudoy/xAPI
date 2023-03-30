@@ -1,8 +1,10 @@
 package com.babijon.commons.command;
 
 import com.babijon.commons.utils.CommandMapUtils;
+import com.babijon.commons.utils.MessageUtil;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
@@ -80,6 +82,14 @@ public abstract class ICommand extends Command {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    protected void tl(Player player, JavaPlugin plugin, String key, String... placeholders) {
+        player.sendMessage(MessageUtil.translateColorCodes(String.format(plugin.getConfig().getString("messages." + key), placeholders)));
+    }
+
+    protected void tl(CommandSender sender, JavaPlugin plugin, String key, String... placeholders) {
+        sender.sendMessage(MessageUtil.translateColorCodes(String.format(plugin.getConfig().getString("messages." + key), placeholders)));
     }
 
 }
